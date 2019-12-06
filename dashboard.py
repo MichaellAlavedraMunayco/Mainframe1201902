@@ -75,8 +75,10 @@ tipo_tarjeta_options = get_adapter(TIPO_TARJETA, "nombre", "nombre")
 
 # Conversiones de fechas para filtro slider
 
-daterange = pd.date_range(start=datetime.strptime(PERIODO["inicio"][0], "%Y-%m-%d").strftime(
-    '%Y/%m/%d'), end=datetime.strptime(PERIODO["fin"][0], "%Y-%m-%d").strftime('%Y/%m/%d'), freq='W')
+daterange = pd.date_range(
+    start=datetime.strptime(
+        PERIODO["inicio"][0], "%Y-%m-%d").strftime('%Y/%m/%d'),
+    end=datetime.strptime(PERIODO["fin"][0], "%Y-%m-%d").strftime('%Y/%m/%d'), freq='W')
 
 
 def unix_time_millis(dt):
@@ -329,7 +331,7 @@ def generate_pdf(n_clicks):
         Input("rangeslider_fecha", "value")
     ]
 )
-def scatter3d_ganancias_timpo(rangeslider_fecha):
+def scatter3d_ganancias_tiempo(rangeslider_fecha):
 
     GANANCIA_TIEMPO = pd.read_csv("monto_tiempo.csv")
 
