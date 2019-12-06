@@ -3,6 +3,7 @@ import pdfkit
 graphs = [
     'https://plot.ly/~MichaellAlavedraMunayco/10',
     'https://plot.ly/~MichaellAlavedraMunayco/8',
+    'https://plot.ly/~MichaellAlavedraMunayco/6',
     'https://plot.ly/~MichaellAlavedraMunayco/4'
 ]
 
