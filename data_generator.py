@@ -1,21 +1,5 @@
 import numpy as np
 import pandas as pd
-from descriptive_stadistics import get_media_aritmetica
-from descriptive_stadistics import get_desviacion_tipica
-
-amount_range = [300000, 500000, 1000000, 1500000]
-
-ds = dict(
-    size=1500,
-    col=dict(
-        mean=dict(
-            profit=get_media_aritmetica(amount_range)
-        ),
-        sdev=dict(
-            profit=get_desviacion_tipica(amount_range)
-        )
-    )
-)
 
 
 def random_date(start_date, range_in_days, size):
@@ -23,15 +7,59 @@ def random_date(start_date, range_in_days, size):
     return np.sort([np.datetime64(start_date) + np.random.choice(days_to_add) for i in range(size)])
 
 
-date = np.array(random_date("2015-01-01", 365 * 5, ds["size"]), dtype=str)
+def generate_date_profit():
 
-profit = np.absolute(np.round(np.random.normal(
-    ds["col"]["mean"]["profit"], ds["col"]["sdev"]["profit"], ds["size"]), 3))
+    ds = dict(
+        size=1500,
+        col=dict(
+            mean=dict(
+                profit=1000000
+            ),
+            sdev=dict(
+                profit=50000
+            )
+        )
+    )
 
-dataset = np.column_stack((date, profit))
+    date = np.array(random_date("2015-01-01", 365 * 5, ds["size"]), dtype=str)
 
-df = pd.DataFrame(dataset, columns=['Date', 'Profit'])
+    profit = np.absolute(np.round(np.random.normal(
+        ds["col"]["mean"]["profit"], ds["col"]["sdev"]["profit"], ds["size"]), 3))
 
-df.to_csv('static/date_profit.csv', index=None, header=True)
+    dataset = np.column_stack((date, profit))
 
-print(df)
+    df = pd.DataFrame(dataset, columns=['Date', 'Profit'])
+
+    df.to_csv('static/date_profit.csv', index=None, header=True)
+
+
+def generate_demand_profit():
+
+    ds = dict(
+        size=1500,
+        col=dict(
+            mean=dict(
+                demand=650000,
+                profit=1000000
+            ),
+            sdev=dict(
+                demand=60000,
+                profit=50000
+            )
+        )
+    )
+
+    demand = np.absolute(np.round(np.random.normal(
+        ds["col"]["mean"]["demand"], ds["col"]["sdev"]["demand"], ds["size"]), 0))
+
+    profit = np.absolute(np.round(np.random.normal(
+        ds["col"]["mean"]["profit"], ds["col"]["sdev"]["profit"], ds["size"]), 3))
+
+    dataset = np.column_stack((demand, profit))
+
+    df = pd.DataFrame(dataset, columns=['Demand', 'Profit'])
+
+    df.to_csv('static/demand_profit.csv', index=None, header=True)
+
+
+generate_demand_profit()
