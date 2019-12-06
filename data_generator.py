@@ -6,7 +6,7 @@ from descriptive_stadistics import get_desviacion_tipica
 amount_range = [300000, 500000, 1000000, 1500000]
 
 ds = dict(
-    size=700000,
+    size=1500,
     col=dict(
         mean=dict(
             profit=get_media_aritmetica(amount_range)
